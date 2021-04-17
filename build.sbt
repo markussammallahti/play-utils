@@ -1,3 +1,5 @@
+import sbtghpackages.TokenSource
+
 name := "play-utils"
 
 organization := "mrks"
@@ -29,3 +31,7 @@ libraryDependencies ++= Seq(
   "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.3" % Test,
   "org.scalamock" %% "scalamock" % "4.4.0" % Test
 )
+
+githubOwner := "markussammallahti"
+githubRepository := "play-utils"
+githubTokenSource := TokenSource.Environment("GITHUB_TOKEN") || TokenSource.GitConfig("github.token")
