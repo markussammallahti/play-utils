@@ -2,10 +2,12 @@
 
 ## Usage
 
+Setup [sbt-github-packages](https://github.com/djspiewak/sbt-github-packages)
+
 Add dependency
 ```
-resolvers += Resolver.bintrayRepo("mrks", "maven")
-libraryDependencies += "mrks" %% "play-utils" % "1.0.0"
+resolvers += Resolver.githubPackages("markussammallahti")
+libraryDependencies += "mrks" %% "play-utils" % "1.0.1"
 ```
 
 See examples in [tests](src/test)
