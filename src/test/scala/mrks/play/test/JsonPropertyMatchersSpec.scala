@@ -10,6 +10,7 @@ class JsonPropertyMatchersSpec extends BaseSpec with JsonPropertyMatchers {
 
   private val data = Json.obj(
     "object" -> Data("key", 1),
+    "array"  -> Json.arr("a", "b"),
     "string" -> "message",
     "number" -> 123
   )
@@ -18,6 +19,8 @@ class JsonPropertyMatchersSpec extends BaseSpec with JsonPropertyMatchers {
     "match property and value" in {
       data must have (
         property ("object", Data("key", 1)),
+        property ("object" \ "value", 1),
+        property ("array" \ 0, "a"),
         property ("string", "message"),
         property ("number", 123)
       )
@@ -26,6 +29,8 @@ class JsonPropertyMatchersSpec extends BaseSpec with JsonPropertyMatchers {
       data must not have (
         property ("object", Data("key", 2)),
         property ("object", Data("other", 1)),
+        property ("object" \ "value", 2),
+        property ("array" \ 1, "a"),
         property ("string", "error"),
         property ("number", 321)
       )
