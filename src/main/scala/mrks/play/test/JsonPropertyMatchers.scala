@@ -1,11 +1,17 @@
 package mrks.play.test
 
+import org.scalatest.enablers.{Length, Size}
 import org.scalatest.matchers.{HavePropertyMatchResult, HavePropertyMatcher}
-import play.api.libs.json.{Format, JsNull, JsPath, JsValue, Json}
+import play.api.libs.json.{Format, JsArray, JsNull, JsObject, JsPath, JsValue, Json}
 
 import scala.language.implicitConversions
 
 trait JsonPropertyMatchers {
+  implicit val lengthOfJsArray: Length[JsArray]   = { _.value.size }
+  implicit val lengthOfJsObject: Length[JsObject] = { _.keys.size }
+  implicit val sizeOfJsArray: Size[JsArray]       = { _.value.size }
+  implicit val sizeOfJsObject: Size[JsObject]     = { _.keys.size }
+
   implicit def intToJsPath(value: Int): JsPath       = JsPath \ value
   implicit def stringToJsPath(value: String): JsPath = JsPath \ value
 
